@@ -23,3 +23,4 @@ Things you may want to cover:
 
 * ...
 # mmw
+rails g migration add_first_name_last_name_gender_dob_mobile_pincode_usertype_to_user
