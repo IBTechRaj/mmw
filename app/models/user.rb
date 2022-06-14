@@ -10,8 +10,7 @@ class User < ApplicationRecord
          enum usertype: %i[client sprovider admin]
              validates :first_name, presence: true
              validates :last_name, presence: true
-             validates :address1, presence: true
-             validates :address2, presence: true
+             
              validates :gender, presence: true
              validates :date_of_birth, presence: true
              validates :email, presence: true, length:  3..244 ,

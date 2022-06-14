@@ -35,42 +35,32 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [gender, setGender] = useState('')
+  const [dob, setDob] = useState('')
+  const [mobile, setMobile] = useState('')
+  const [pincode, setPincode] = useState('')
 
 
-  const loginData = {
+  const user = {
     "email": email,
     "password": password,
   }
 
-  const signupData = {
-    "email": email,
-    "password": password,
-  }
-
-
-  // const handleSubmitSignup = async (event) => {
-  //   event.preventDefault();
-  //   if (password === passwordConfirmation) {
-  //     console.log('signing up')
-  //     try {
-  //       const res = await axios.post('http://localhost:3001/signup ', signupData);
-  //       const { token, user } = res.data;
-  //       console.log('res', res.data);
-  //       if (token) {
-  //         setLoggedIn(true);
-  //         onCloseSignupModal()
-  //         localStorage.setItem('token', token);
-  //         console.log('jwt: ', token)
-  //       }
-  //     }
-  //     catch (error) {
-  //       console.log('oh, no', error);
-  //     }
-  //   }
-  //   else {
-  //     console.log('Passwords should match')
-  //   }
+  // const signupData = {
+  //   "email": email,
+  //   "password": password,
+  //   "first_name": firstName,
+  //   "last_name": lastName,
+  //   "gender": gender,
+  //   "date_of_birth": dob,
+  //   "mobile": mobile,
+  //   "pincode": pincode,
+  //   "usertype": 0
   // }
+
+
 
   const handleSubmitSignup = async (event) => {
     event.preventDefault();
@@ -83,8 +73,15 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
         },
         body: JSON.stringify({
           user: {
-            email: email,
-            password: password,
+            "email": email,
+            "password": password,
+            "first_name": firstName,
+            "last_name": lastName,
+            "gender": gender,
+            "date_of_birth": dob,
+            "mobile": mobile,
+            "pincode": pincode,
+            "usertype": 0
           },
         }),
       })
@@ -92,6 +89,8 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
           if (res.ok) {
             console.log(res.headers.get("Authorization"));
             localStorage.setItem("token", res.headers.get("Authorization"));
+            setLoggedIn(true);
+            onCloseSignupModal()
             return res.json();
           } else {
             throw new Error(res);
@@ -110,20 +109,37 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
     event.preventDefault();
     console.log('logging')
     try {
-      const res = await axios.post('http://localhost:3001/users/sign_in ', loginData);
-      const { token, user } = res.data;
-      console.log('res', res.data);
-      if (token) {
-        setLoggedIn(true);
-        onCloseLoginModal()
-        localStorage.setItem('token', token);
-        console.log('jwt: ', token)
-      }
+      fetch("http://localhost:3001/login", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: {
+            "email": email,
+            "password": password
+          },
+        }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            console.log(res.headers.get("Authorization"));
+            localStorage.setItem("token", res.headers.get("Authorization"));
+            setLoggedIn(true);
+            onCloseLoginModal()
+            return res.json();
+          } else {
+            throw new Error(res);
+          }
+        })
+        .then((json) => console.dir(json))
     }
     catch (error) {
       console.log('Err: ', error);
     }
   }
+
+
   const handleLogout = () => {
     delete axios.defaults.headers.common.Authorization;
     setLoggedIn(false)
@@ -276,19 +292,130 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
           </div> */}
         </form>
       </Modal>
+
+
       <Modal open={openSignup} onClose={onCloseSignupModal} centre>
         <h2>Signup</h2>
         <form onSubmit={handleSubmitSignup}>
           <label className="justify-left w-100 px-5">
-            {/* User Name
+
+            Email
             <input
               className="form-control"
-              placeholder="username"
+              placeholder="email"
               type="text"
-              name="username"
-              value={username}
-              onChange={this.handleChange}
-            /> */}
+              name="email"
+              value={email}
+              onChange={event => {
+                setEmail(event.target.value)
+              }}
+            />
+            Password
+            <input
+              className="form-control"
+              placeholder="password"
+              type="password"
+              name="password"
+              value={password}
+              onChange={event => {
+                setPassword(event.target.value)
+              }}
+            />
+            Confirm Password
+            <input
+              className="form-control"
+              placeholder="password confirmation"
+              type="password"
+              name="passwordConfirmation"
+              value={passwordConfirmation}
+              onChange={event => {
+                setPasswordConfirmation(event.target.value)
+              }}
+            />
+            First Name
+            <input
+              className="form-control"
+              placeholder="First Name"
+              type="string"
+              name="firstname"
+              value={firstName}
+              onChange={event => {
+                setFirstName(event.target.value)
+              }}
+            />
+            Last Name
+            <input
+              className="form-control"
+              placeholder="Last Name"
+              type="string"
+              name="lastName"
+              value={lastName}
+              onChange={event => {
+                setLastName(event.target.value)
+              }}
+            />
+            Gender
+            {/* <label> */}
+            Your Gender:
+            <select value={gender} onChange={event => {
+              setGender(parseInt(event.target.value))
+            }}
+            >
+              <option value="0" >She</option>
+              <option value="1" >He</option>
+              <option value="2" >Others</option>
+            </select>
+            {/* </label> */}
+
+            Date of Birth
+            <input
+              className="form-control"
+              placeholder="Date of Birth"
+              type="date"
+              name="dob"
+              value={dob}
+              onChange={event => {
+                setDob(event.target.value)
+              }}
+            />
+            Mobile
+            <input
+              className="form-control"
+              placeholder="Mobile"
+              type="string"
+              name="mopbile"
+              value={mobile}
+              onChange={event => {
+                setMobile(event.target.value)
+              }}
+            />
+            Pincode
+            <input
+              className="form-control"
+              placeholder="Pincode"
+              type="string"
+              name="pincode"
+              value={pincode}
+              onChange={event => {
+                setPincode(event.target.value)
+              }}
+            />
+          </label>
+
+          <label className="justify-left w-100 px-5">
+            {' '}
+            <input className="w-100 btn btn-custom" type="submit" />
+          </label>
+        </form >
+      </Modal >
+
+
+
+      {/* <Modal open={openSignup} onClose={onCloseSignupModal} centre>
+        <h2>Signup</h2>
+        <form onSubmit={handleSubmitSignup}>
+          <label className="justify-left w-100 px-5">
+           
             Email
             <input
               className="form-control"
@@ -329,7 +456,7 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
             <input className="w-100 btn btn-custom" type="submit" />
           </label>
         </form>
-      </Modal>
+      </Modal> */}
 
     </>
   );
