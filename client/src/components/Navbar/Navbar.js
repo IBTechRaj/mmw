@@ -65,6 +65,18 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
   const handleSubmitSignup = async (event) => {
     event.preventDefault();
     if (password === passwordConfirmation) {
+      const emailData = {
+        "subject": 'Client Registration Success!',
+        "name": firstName,
+        "email": email,
+        "message":
+          "Dear " + firstName
+          + ",\n\n"
+          + "Thank you for registering with MyMotorWash Services. Now you can login and book your vehicle service from the convenience of your home\n"
+          + "For any queries please call Customer Care."
+          + "\n\n"
+          + "Team MyMotorWash"
+      }
       console.log('signing up')
       fetch("http://localhost:3001/signup", {
         method: "post",
@@ -93,10 +105,26 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
             onCloseSignupModal()
             return res.json();
           } else {
+            console.log('Error signup')
+            onCloseSignupModal()
             throw new Error(res);
           }
         })
         .then((json) => console.dir(json))
+        .then(() => {
+          // console.log('md', signupData);
+          const jwt = localStorage.getItem('token')
+          const url = 'http://localhost:3001/contacts'
+
+          try {
+            const res = axios.post(url, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
+            console.log('res', res);
+          }
+          catch (error) {
+            console.log('oh, no', error);
+          }
+
+        })
         .catch((err) => console.error(err));
 
     }
