@@ -3,15 +3,14 @@ import React, { useState } from 'react'
 import { Modal, Button, Alert } from 'react-bootstrap';
 // import { Modal } from 'react-responsive-modal';
 
-// import BookingForm from './BookingForm'
+import BookingForm from './BookingForm'
 // import './booking.css'
 
-import BookService from './BookService'
 
 
-const Booking = (props) => {
 
-  const [bookingVisible, setBookingVisible] = useState(false)
+const Booking = () => {
+
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);
@@ -39,33 +38,9 @@ const Booking = (props) => {
         {/* < Button style={{ backgroundColor: "#2C5777" }} onClick={handleShow}> Book Your Slot</Button >
         <i className="material-icons">&#xE147;</i>
          */}
-        <Button onClick={() => setBookingVisible(true)} className="btn btn-success" data-toggle="modal"><span>Book Your Slot</span></Button>
+        <Button onClick={handleShow} className="btn btn-success" data-toggle="modal"><span>Book Your Slot</span></Button>
       </div>
-
-      {/* {show && */}
-      {/* <Card clientId={props.clientId} /> */}
-      {/* } */}
-
-
-      {bookingVisible &&
-        <BookService
-          // booking={booking}
-          // setBooking={setBooking}
-          // salonId={salon.id}
-          // salonName={salon.name}
-          // salonEmail={salon.email}
-          // salonLandline={salon.landline}
-          // salonMobile={salon.mobile}
-          // services={filteredServices(services)}
-          // clientName={userName}
-          // clientEmail={props.userEmail}
-          // clientMobile={props.userMobile}
-          clientId={props.clientId}
-          setBookingVisible={setBookingVisible}
-        />}
-
-      {/* </div> */}
-      {/* <Modal open={openBooking} onClose={onCloseBookingModal} centre>
+      <Modal open={openBooking} onClose={onCloseBookingModal} centre>
         <h2>Book Your Slot</h2>
         <form onSubmit={handleSubmitBooking}>
           <label className="justify-left w-100 px-5">
@@ -97,8 +72,8 @@ const Booking = (props) => {
             <input className="w-100 btn btn-custom" type="submit" />
           </label>
         </form>
-      </Modal> */}
-      {/* <Modal show={show} onHide={handleClose}>
+      </Modal>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
             Book Your Slot
@@ -112,7 +87,7 @@ const Booking = (props) => {
             Cancel
           </Button>
         </Modal.Footer>
-      </Modal> */}
+      </Modal>
     </>
   )
 }

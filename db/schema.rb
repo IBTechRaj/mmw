@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_15_045734) do
+ActiveRecord::Schema.define(version: 2022_06_16_012625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "areas", force: :cascade do |t|
+    t.string "pincode"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_areas_on_user_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.date "bkg_date"
+    t.time "bkg_time"
+    t.string "service"
+    t.bigint "user_id", null: false
+    t.bigint "area_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "address1"
+    t.string "address2"
+    t.string "pincode"
+    t.index ["area_id"], name: "index_bookings_on_area_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string "subject"
@@ -45,4 +68,7 @@ ActiveRecord::Schema.define(version: 2022_06_15_045734) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "areas", "users"
+  add_foreign_key "bookings", "areas"
+  add_foreign_key "bookings", "users"
 end

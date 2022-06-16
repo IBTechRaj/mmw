@@ -12,18 +12,28 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Booking from './components/Bookings/Booking';
+import Card from './components/Bookings/Card'
 
 const getLoggedStatus = () => {
   let loggedIn
 }
 
-
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
+  const [client, setClient] = useState(false)
+  const [sprovider, setSprovider] = useState(false)
+  const [admin, setAdmin] = useState(false)
+  const [clientId, setClientId] = useState(false)
+
   return (
     <Router>
-      <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-      {loggedIn ? (<Booking />) : (null)}
+      <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}
+        client={client} setClient={setClient}
+        setSprovider={setSprovider}
+        setAdmin={setAdmin}
+        clientId={clientId} setClientId={setClientId} />
+      {console.log('cl', client)}
+      {client ? (<Booking clientId={clientId} />) : (null)}
       {/* <Header /> */}
       {/* <Signup /> */}
       <Switch>

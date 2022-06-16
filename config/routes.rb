@@ -9,4 +9,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
     resources :contacts
+    resources :areas
+   
+    
+  get 'bookings/:bkg_date/:pincode', to: 'bookings#getAreaDateBkgs'
+  resources :bookings
 end

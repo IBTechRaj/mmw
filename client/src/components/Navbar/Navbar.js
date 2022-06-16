@@ -11,7 +11,7 @@ import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 
 
-const Navbar = ({ loggedIn, setLoggedIn }) => {
+const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovider, admin, setAdmin, clientId, setClientId }) => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -97,8 +97,10 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
           },
         }),
       })
+        .then((data) => console.log('data', data))
         .then((res) => {
           if (res.ok) {
+            console.log('sup res', res)
             console.log(res.headers.get("Authorization"));
             localStorage.setItem("token", res.headers.get("Authorization"));
             setLoggedIn(true);
@@ -110,7 +112,10 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
             throw new Error(res);
           }
         })
-        .then((json) => console.dir(json))
+
+        .then((json) => {
+          console.dir(json)
+        })
         .then(() => {
           // console.log('md', signupData);
           const jwt = localStorage.getItem('token')
@@ -158,6 +163,18 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
             return res.json();
           } else {
             throw new Error(res);
+          }
+        })
+        .then((data) => {
+          setClientId(data.data.id)
+          console.log('data', data.data.usertype);
+          if (data.data.usertype === 'client') {
+            setClient(true)
+          }
+          else if (data.data.usertype === 'sprovider') {
+            setSprovider(true)
+          } else if (data.data.usertype === 'admin') {
+            setAdmin(true)
           }
         })
         .then((json) => console.dir(json))
