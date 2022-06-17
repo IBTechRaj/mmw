@@ -1,14 +1,11 @@
 import React from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap'
-// import { Button } from '../../Button';
 import './gallery.css';
-// import { Link } from 'react-router-dom';
 
 const Gallery = () => {
   return (
-    <Container fluid className="container portfolio">
+    <Container fluid className="container portfolio" id="gallery">
       <Row className="portfolio">
-        {/* <div className="container"> */}
         <div className="section-header">
           <h2 className="section-title text-center wow fadeInDown">Gallery</h2>
           <p className="text-center wow fadeInDown">
@@ -17,17 +14,6 @@ const Gallery = () => {
           </p>
         </div>
       </Row>
-      {/* <Row>
-        <div className="text-center">
-          <ul className="portfolio-filter">
-            <li><a className="active" href="#" data-filter="*">Show All</a></li>
-            <li><a href="#" data-filter=".designing">Exterior</a></li>
-            <li><a href="#" data-filter=".mobile">Interior</a></li>
-          </ul>
-        #portfolio-filter
-        </div>
-      </Row>
- */}
 
       <Row >
         <Col className="portfolio-item designing">
@@ -66,6 +52,7 @@ const Gallery = () => {
           </div>
         </Col>
       </Row>
+
       <Row>
         {/*/.portfolio-item*/}
         <Col className="portfolio-item designing development">
@@ -103,7 +90,6 @@ const Gallery = () => {
             </div>
           </div>
         </Col>
-
       </Row >
     </Container >
 

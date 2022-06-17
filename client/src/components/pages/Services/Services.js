@@ -1,17 +1,12 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
-// import { FaHeart, FaPaintBrush, FaTimes } from 'react-icons/fa';
 import { MdLocalCarWash, MdSettings } from 'react-icons/md';
-// import { GoPaintCan } from 'react-icons/go';
 import { GiAutoRepair, GiLargePaintBrush, GiCrystalShine, GiTheaterCurtains } from 'react-icons/gi';
 
-// var NewComponent = React.createClass({
 const Services = () => {
   return (
     <>
-      {/* <section id="services"> */}
-      {/* <div className="container"> */}
-      <div className="section-header">
+      <div className="section-header" id="services">
         <h2 className="section-title text-center wow fadeInDown mt-3" style={{ color: 'black' }}>Services</h2>
         <p className="text-center wow fadeInDown">
           Water wash <br />
@@ -21,7 +16,6 @@ const Services = () => {
       </div>
       <Container>
         <Row >
-          {/* <div className="features"> */}
           <Col xs={6} md={4} className='mb-4'>
             <Row>
               <Col xs={3} md={2}>
@@ -134,10 +128,6 @@ const Services = () => {
 
         </Row>
       </Container>
-      {/*/.row*/}
-      {/* </div> */}
-      {/*/.container*/}
-      {/* </section> */}
     </>
   )
 

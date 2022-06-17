@@ -26,7 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   textAlign: 'left',
   color: theme.palette.text.secondary,
-  height: 200,
+  height: 190,
   lineHeight: '60px',
 }));
 
@@ -36,12 +36,12 @@ export default function Elevation(props) {
 
   console.log('ele props', props)
 
-  const services = ['Car Wash', 'Car Polish', 'Bike Wash', 'Bike Polish']
+  const services = ['Car Wash', 'Car Painting', 'Car Polishing', 'Car Repair', 'Music System', 'Scratch Removal', 'Car Checkup', 'Car Interior', 'Denting', 'Tyre Change', 'Car Exterior', 'Car Salon']
   const [areas, setAreas] = useState([])
 
   const [service, setService] = useState('Choose Service')
   const [pincode, setPincode] = useState('Choose Pincode')
-  const [areaId, setAreaId] = useState(0)
+  // const [areaId, setAreaId] = useState(0)
   const [showTime, setShowTime] = useState(false)
   const [apptDate, setApptDate] = useState()
   const [apptTime, setApptTime] = useState('0:00')
@@ -75,42 +75,22 @@ export default function Elevation(props) {
   const createAppointment = (e) => {
     e.preventDefault()
     const emailClientData = {
-      "subject": 'Appointment Booking Success!',
+      "subject": 'Booking Success!',
       "name": props.clientName,
       "email": props.clientEmail,
       "message":
         "Dear " + props.clientName
         + ",\n\n"
-        + "Thank you for booking your service with GroomWell Services partner. The following are the details of your appointment\n"
+        + "Thank you for booking your motor wash with MyMotorWash Services. The following are the details of your booking\n"
         + "\nAppointment Date :" + startDate
         + "\nAppointment Time : " + apptTime
         + "\nService Name: " + service
-        + "\nSalon Name: " + props.salonName
-        + "\nSalon Phone : " + props.salonLandline
-        + "\nSalon Mobile : " + props.salonMobile
         + "\n\n"
-        + "Kindly reach the salon at least 15 minutes before appoint time. For any queries please call Customer Care."
+        + "Kindly be available to show your vehicle when our service person arrives. For any queries please call Customer Care."
         + "\n\n"
-        + "Team GroomWell"
+        + "Team MyMotorWash"
     }
-    const emailSpData = {
-      "subject": 'You have new business!',
-      "name": props.salonName,
-      "email": props.salonEmail,
-      "message":
-        "Dear " + props.salonName
-        + ",\n\n"
-        + "We are glad to inform you that one client has booked his service through us at your salon. The following are the details of your appointment\n"
-        + "\nAppointment Date :" + startDate
-        + "\nAppointment Time : " + apptTime
-        + "\nCustomer Name : " + props.clientName
-        + "\nCustomer Mobile : " + props.clientMobile
-        + "\nService booked : " + service
-        + "\n\n"
-        + "Kindly call the customer preferably a day before and confirm the appointment. For any queries please call Customer Care."
-        + "\n\n"
-        + "Team GroomWell"
-    }
+
     const booking = {
       bkg_date: startDate,
       bkg_time: apptTime,
@@ -130,147 +110,136 @@ export default function Elevation(props) {
     })
       .then(response => {
         if (response.status === 201) {
+          props.setBookingVisible(false)
           console.log('Booking Done')
+          alert('Your booking successful')
         }
       })
-    // .then(() => {
-    //   const jwt = localStorage.getItem('token')
-    //   const url = 'http://localhost:3001/contacts'
+      .then(() => {
+        const jwt = localStorage.getItem('token')
+        const url = 'http://localhost:3001/contacts'
 
-    //   try {
-    //     const res = axios.post(url, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
-    //     console.log('res', res);
-    //   }
-    //   catch (error) {
-    //     console.log('cl eml err', error);
-    //   }
+        try {
+          const res = axios.post(url, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
+          console.log('res', res);
+        }
+        catch (error) {
+          console.log('cl eml err', error);
+        }
 
-    // })
-    //   .then(() => {
-    //     const jwt = localStorage.getItem('token')
-    //     const url = 'http://localhost:3001/contacts'
-
-    //     try {
-    //       const res = axios.post(url, emailSpData, { headers: { Authorization: `Bearer ${jwt}` } });
-    //       console.log('res', res);
-    //       props.setBookingVisible(false)
-    //     }
-    //     catch (error) {
-    //       console.log('sp eml err', error);
-    //     }
-
-    //   })
+      })
   }
 
   const [startDate, setStartDate] = useState(new Date());
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={6} >
+    <Grid container spacing={2}
+      justifyContent="center"
+    >
+      <Grid item  >
         <ThemeProvider theme={lightTheme}>
           <Box
             sx={{
               p: 2,
               bgcolor: 'background.default',
               display: 'grid',
-              gridTemplateColumns: { md: '1fr 1fr' },
-              gap: 2,
+              // gridTemplateColumns: { md: '1fr 1fr' },
+              // gap: 2,
               position: 'absolute',
-              zIndex: 'modal'
+              zIndex: 'modal',
+
             }}
           >
-            <Item elevation={8}>
-              <Card
-                sx={{ minWidth: 275 }}
-              >
-                <CardContent>
-                  <Typography variant="h5" sx={{ mb: 1.5 }}
-                  >
-                    Booking Details
-                  </Typography>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    Address1 :
-                    <TextField
-                      required
-                      fullWidth
-                      id="address1"
-                      label="Address1"
-                      value={address1}
-                      onChange={event => {
-                        setAddress1(event.target.value)
-                      }}
-                    />
-                  </Typography>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    Address2 :
-                    <TextField
-                      required
-                      fullWidth
-                      id="address2"
-                      label="Address2"
-                      value={address2}
-                      onChange={event => {
-                        setAddress2(event.target.value)
-                      }}
-                    />
-                  </Typography>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    PinCode :
-                    <select onChange={handlePincodeChange}>
-                      <option value="choose">
-                      </option>
-                      {areas.map((area) => <option key={area.id} value={area.pincode}>{area.pincode}</option>)}
+            {/* <Item elevation={8}> */}
+            <Card
+              sx={{ minWidth: 275 }}
+            >
+              <CardContent>
+                <Typography variant="h5" sx={{ mb: 1.5 }}
+                >
+                  Booking Details
+                </Typography>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  Address1 :
+                  <TextField
+                    required
+                    fullWidth
+                    id="address1"
+                    label="Address1"
+                    value={address1}
+                    onChange={event => {
+                      setAddress1(event.target.value)
+                    }}
+                  />
+                </Typography>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  Address2 :
+                  <TextField
+                    required
+                    fullWidth
+                    id="address2"
+                    label="Address2"
+                    value={address2}
+                    onChange={event => {
+                      setAddress2(event.target.value)
+                    }}
+                  />
+                </Typography>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  PinCode :
+                  <select onChange={handlePincodeChange}>
+                    <option value="choose">
+                    </option>
+                    {areas.map((area) => <option key={area.id} value={area.pincode}>{area.pincode}</option>)}
 
-                    </select>
-                  </Typography>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    Service :
-                    <select onChange={handleServiceChange}>
-                      <option value="choose">
-                      </option>
-                      {services.map((service) => <option key={service.index} value={service}>{service}</option>)}
-                    </select>
-                  </Typography>
-                  {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    Client : {props.clientName}
-                  </Typography> */}
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    Booking Date :
-                    {/* <div> */}
-                    <Row >
-                      <Col xs={6} style={{ marginLeft: 200, position: 'absolute' }}>
+                  </select>
+                </Typography>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  Service :
+                  <select onChange={handleServiceChange}>
+                    <option value="choose">
+                    </option>
+                    {services.map((service) => <option key={service.index} value={service}>{service}</option>)}
+                  </select>
+                </Typography>
 
-                        {showTime ? <TimeSlots setApptTime={setApptTime} setShowTime={setShowTime} startDate={startDate} pincode={pincode} /> : null}
-                        {console.log('dt,tm', startDate.toLocaleDateString(), apptTime)}
-                      </Col>
-                      <Col xs={6} >
-                        <DatePicker
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
-                          shouldCloseOnSelect={false}
-                          onSelect={setDateShowTime}
-                        />
-                      </Col>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  Booking Date :
 
-                    </Row>
-                    {/* </div> */}
-                  </Typography>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                    Booking Time : {apptTime}
-                  </Typography>
+                  <Row >
+                    <Col xs={6} style={{ marginLeft: 200, position: 'absolute' }}>
 
-                </CardContent>
-                <CardActions>
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    onClick={() => props.setBookingVisible(false)}
-                  >Cancel</Button>
-                  <Button size="small" variant="contained"
-                    onClick={createAppointment}
-                  >Confirm</Button>
-                </CardActions>
-              </Card>
-            </Item>
+                      {showTime ? <TimeSlots setApptTime={setApptTime} setShowTime={setShowTime} startDate={startDate} pincode={pincode} /> : null}
+                      {console.log('dt,tm', startDate.toLocaleDateString(), apptTime)}
+                    </Col>
+                    <Col xs={6} >
+                      <DatePicker
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                        shouldCloseOnSelect={false}
+                        onSelect={setDateShowTime}
+                      />
+                    </Col>
+
+                  </Row>
+
+                </Typography>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary">
+                  Booking Time : {apptTime}
+                </Typography>
+
+              </CardContent>
+              <CardActions>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  onClick={() => props.setBookingVisible(false)}
+                >Cancel</Button>
+                <Button size="small" variant="contained"
+                  onClick={createAppointment}
+                >Confirm</Button>
+              </CardActions>
+            </Card>
+            {/* </Item> */}
             {/* ))} */}
           </Box>
         </ThemeProvider>
@@ -278,5 +247,6 @@ export default function Elevation(props) {
       )
       {/* )} */}
     </Grid>
+    // </div>
   );
 }

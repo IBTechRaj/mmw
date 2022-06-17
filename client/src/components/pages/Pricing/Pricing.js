@@ -1,12 +1,6 @@
 import React from 'react';
 import { Row } from 'react-bootstrap'
-// import { Button } from '../../Button';
 import './Pricing.css';
-// import { FaFire } from 'react-icons/fa';
-// import { BsXDiamondFill } from 'react-icons/bs';
-// import { GiCrystalize } from 'react-icons/gi';
-// import { IconContext } from 'react-icons/lib';
-// import { Link } from 'react-router-dom';
 
 const Pricing = () => {
   return (
@@ -15,7 +9,7 @@ const Pricing = () => {
     <Row style={{
       background: '#F4F4F5'
     }}>
-      <div className="container">
+      <div className="container" id="pricing">
         <div className="section-header">
           <h2 className="section-title text-center wow fadeInDown mt-4" style={{ color: 'black' }}>Our Pricing</h2>
           <p className="text-center wow fadeInDown">
@@ -63,7 +57,6 @@ const Pricing = () => {
                 Car Exterior <span className="price">Rs.150</span>
                 <div className="detail">Exterior accessories can be attached if  available with you</div>
               </li>
-
             </ul>
           </div>
           <div className="col-md-4 menuItem">

@@ -1,6 +1,4 @@
 import React from 'react';
-// import HeroSection from './HeroSection';
-// import { homeObjOne } from './pages/HomePage/Data';
 import Services from './pages/Services/Services'
 import About from './pages/About/About'
 import Hero from './pages/Hero/Hero'
@@ -15,7 +13,6 @@ function Home() {
   return (
     <>
       <MyCarousel />
-      {/* <ModalForm /> */}
       <Hero />
       <Services />
       <Hero2 />
@@ -24,11 +21,6 @@ function Home() {
       <Gallery />
       <Location />
       <Contact />
-      {/* <HeroSection {...homeObjOne} /> */}
-      {/* <HeroSection {...homeObjThree} /> */}
-      {/* <HeroSection {...homeObjTwo} /> */}
-      {/* <Pricing /> */}
-      {/* <HeroSection {...homeObjFour} /> */}
     </>
   );
 }

@@ -48,14 +48,13 @@ export default function ResponsiveGrid(props) {
   const blocks = []
   let cursor = from
   while (isBefore(cursor, to)) {
-    console.log('timings', cursor.toLocaleTimeString())
+    // console.log('timings', cursor.toLocaleTimeString())
     blocks.push(cursor.toLocaleTimeString().slice(-11, -6) + cursor.toLocaleTimeString().slice(-3))
     cursor = step(cursor)
   }
   console.log(blocks)
 
   const classes = useStyles()
-  console.log('tl props', props)
   const [reserved, setReserved] = useState([])
 
   const getApptTime = (tmslot) => {
@@ -69,7 +68,7 @@ export default function ResponsiveGrid(props) {
   }
 
   useEffect(() => {
-    const jwt = localStorage.getItem('token');
+    // const jwt = localStorage.getItem('token');
     const apptUrl = `http://localhost:3001/bookings/${props.startDate.toUTCString()}/${props.pincode}`;
 
     const getCurrentAppts = async () => {
@@ -87,7 +86,6 @@ export default function ResponsiveGrid(props) {
                 tm = h + tm.substr(2, 3) + ampm
                 return tm
               })
-              console.log('ampm', ampm)
               setReserved(ampm)
             }
           })
@@ -96,7 +94,6 @@ export default function ResponsiveGrid(props) {
         setReserved(null);
       }
     }
-
     getCurrentAppts()
 
   }, [])
@@ -114,9 +111,7 @@ export default function ResponsiveGrid(props) {
   }
 
   return (
-
     <>
-
       <Card style={cardStyle}
         sx={{ maxHeight: 900, border: 1, marginLeft: 6, position: 'absolute' }}
       >
@@ -152,13 +147,11 @@ export default function ResponsiveGrid(props) {
           </Typography>
           <Typography divider component='div' variant='subtitle1' sx={{ textAlign: 'center' }}>Booked : Free</Typography>
           <Grid container columns={{ xs: 2, sm: 4, md: 6 }} sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
-
             {blocks.map((tmslot, index) => (
               <Grid item
                 className=
                 {classes.item} key={index} sx={{ width: 95, height: 31, }}
               >
-
                 <Item className=
                   {classes.item} key={index} sx={{
                     backgroundColor: (reserved.includes(tmslot) ? '#42e3f5' : 'white'), marginLeft: 0
@@ -169,13 +162,9 @@ export default function ResponsiveGrid(props) {
               </Grid>
             ))}
           </Grid>
-
         </CardContent>
         <CardActions>
-
-
         </CardActions>
-
       </Card>
     </>
   );

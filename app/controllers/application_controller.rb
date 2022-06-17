@@ -4,8 +4,7 @@ class ApplicationController < ActionController::API
 
     protected
   
-    # If you have extra params to permit, append them to the sanitizer.
-    def configure_permitted_parameters
+      def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :gender, :date_of_birth, :mobile, :pincode, :usertype])
     end
 end

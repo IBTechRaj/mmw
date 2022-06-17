@@ -14,7 +14,6 @@ function Footer() {
   return (
     <div className='footer-container'>
 
-
       {/* <section className='social-media'> */}
       <div className='social-media-wrap'>
         <div className='footer-logo'>

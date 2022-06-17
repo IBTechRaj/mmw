@@ -9,15 +9,10 @@ const Hero = () => {
     <section className="hero-text">
       <Row className="container text-center">
         <div className="row">
-          {/* <div className="col-sm-9 text-center"> */}
           <h2>Make your Car Shine with Our Service</h2>
           <p>
             We are the pioneers in rendering home service for your car wash.
           </p>
-          {/* </div> */}
-          {/* <div className="col-sm-3 text-right">
-            <a className="btn btn-primary btn-lg" href="#portfolio">Gallery</a>
-          </div> */}
         </div>
       </Row>
     </section>

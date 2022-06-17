@@ -5,7 +5,7 @@ class AreasController < ApplicationController
     end
    
     def new
-      # @contact = Contact.new
+      @area = Area.new
     end
    
     def create

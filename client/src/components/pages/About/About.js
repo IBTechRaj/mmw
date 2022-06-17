@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap'
 
-// var NewComponent = React.createClass({
 function About() {
   return (
     <>

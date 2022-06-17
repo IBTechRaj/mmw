@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
-import { Button } from '../Button';
-import { Link } from 'react-router-dom';
+// import { Button } from '../Button';
+// import { BrowserRouter } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import './Navbar.css';
 import { MdLocalCarWash } from 'react-icons/md';
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -11,7 +12,7 @@ import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 
 
-const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovider, admin, setAdmin, clientId, setClientId }) => {
+const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovider, admin, setAdmin, clientId, setClientId, clientEmail, setClientEmail, clientName, setClientName }) => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -41,24 +42,6 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
   const [dob, setDob] = useState('')
   const [mobile, setMobile] = useState('')
   const [pincode, setPincode] = useState('')
-
-
-  const user = {
-    "email": email,
-    "password": password,
-  }
-
-  // const signupData = {
-  //   "email": email,
-  //   "password": password,
-  //   "first_name": firstName,
-  //   "last_name": lastName,
-  //   "gender": gender,
-  //   "date_of_birth": dob,
-  //   "mobile": mobile,
-  //   "pincode": pincode,
-  //   "usertype": 0
-  // }
 
 
 
@@ -97,13 +80,12 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
           },
         }),
       })
-        .then((data) => console.log('data', data))
         .then((res) => {
           if (res.ok) {
-            console.log('sup res', res)
             console.log(res.headers.get("Authorization"));
             localStorage.setItem("token", res.headers.get("Authorization"));
             setLoggedIn(true);
+
             onCloseSignupModal()
             return res.json();
           } else {
@@ -112,12 +94,23 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
             throw new Error(res);
           }
         })
-
+        .then((data) => {
+          setClientId(data.data.id)
+          if (data.data.usertype === 'client') {
+            setClient(true)
+            setClientName(data.data.first_name)
+            setClientEmail(data.data.email)
+          }
+          else if (data.data.usertype === 'sprovider') {
+            setSprovider(true)
+          } else if (data.data.usertype === 'admin') {
+            setAdmin(true)
+          }
+        })
         .then((json) => {
           console.dir(json)
         })
         .then(() => {
-          // console.log('md', signupData);
           const jwt = localStorage.getItem('token')
           const url = 'http://localhost:3001/contacts'
 
@@ -128,10 +121,8 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
           catch (error) {
             console.log('oh, no', error);
           }
-
         })
         .catch((err) => console.error(err));
-
     }
     else {
       console.log('Passwords should match')
@@ -167,9 +158,11 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
         })
         .then((data) => {
           setClientId(data.data.id)
-          console.log('data', data.data.usertype);
+          console.log('data', data.data);
           if (data.data.usertype === 'client') {
             setClient(true)
+            setClientName(data.data.first_name)
+            setClientEmail(data.data.email)
           }
           else if (data.data.usertype === 'sprovider') {
             setSprovider(true)
@@ -184,16 +177,13 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
     }
   }
 
-
   const handleLogout = () => {
     delete axios.defaults.headers.common.Authorization;
     setLoggedIn(false)
+    setClient(false)
     localStorage.removeItem('token');
   }
 
-  // const handleLogout = (){
-
-  // }
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -227,13 +217,13 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
 
 
               <li className='nav-item'>
-                <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                <Link to='#home' className='nav-links' onClick={closeMobileMenu}>
                   Home
                 </Link>
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/services'
+                  to='#services'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
@@ -242,7 +232,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/whowe'
+                  to='#about'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
@@ -251,7 +241,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/pricing'
+                  to='#pricing'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
@@ -260,7 +250,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/gallery'
+                  to='/#gallery'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
@@ -270,7 +260,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
 
               <li className='nav-item'>
                 <Link
-                  to='/contact'
+                  to='#contact'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
@@ -278,9 +268,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
                 </Link>
               </li>
 
-              {/* </ul> */}
-              {/* <ul> */}
-              {/* {(openLogin || openSignup) ? ( */}
+
               {(loggedIn) ? (
                 <li>
                   <button className='nav-links' style={{ backgroundColor: 'black', border: 'none' }} onClick={handleLogout}>Logout</button>
@@ -332,9 +320,6 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
             <input className="w-100 btn btn-custom" type="submit" />
           </label>
 
-          {/* <div>
-            or <Link to="/signup">Sign up</Link>
-          </div> */}
         </form>
       </Modal>
 
@@ -453,55 +438,6 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
           </label>
         </form >
       </Modal >
-
-
-
-      {/* <Modal open={openSignup} onClose={onCloseSignupModal} centre>
-        <h2>Signup</h2>
-        <form onSubmit={handleSubmitSignup}>
-          <label className="justify-left w-100 px-5">
-           
-            Email
-            <input
-              className="form-control"
-              placeholder="email"
-              type="text"
-              name="email"
-              value={email}
-              onChange={event => {
-                setEmail(event.target.value)
-              }}
-            />
-            Password
-            <input
-              className="form-control"
-              placeholder="password"
-              type="password"
-              name="password"
-              value={password}
-              onChange={event => {
-                setPassword(event.target.value)
-              }}
-            />
-            Confirm Password
-            <input
-              className="form-control"
-              placeholder="password confirmation"
-              type="password"
-              name="passwordConfirmation"
-              value={passwordConfirmation}
-              onChange={event => {
-                setPasswordConfirmation(event.target.value)
-              }}
-            />
-          </label>
-
-          <label className="justify-left w-100 px-5">
-            {' '}
-            <input className="w-100 btn btn-custom" type="submit" />
-          </label>
-        </form>
-      </Modal> */}
 
     </>
   );
