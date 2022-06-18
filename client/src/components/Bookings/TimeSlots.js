@@ -41,18 +41,14 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function ResponsiveGrid(props) {
   const setTime = (x, h = 0, m = 0) => setHours(setMinutes(x, m), h)
   const from = setTime(new Date(), 7)
-  console.log(from)
   const to = setTime(new Date(), 21)
-  console.log(to)
   const step = (x) => addMinutes(x, 30)
   const blocks = []
   let cursor = from
   while (isBefore(cursor, to)) {
-    // console.log('timings', cursor.toLocaleTimeString())
     blocks.push(cursor.toLocaleTimeString().slice(-11, -6) + cursor.toLocaleTimeString().slice(-3))
     cursor = step(cursor)
   }
-  console.log(blocks)
 
   const classes = useStyles()
   const [reserved, setReserved] = useState([])
@@ -78,7 +74,6 @@ export default function ResponsiveGrid(props) {
         )
           .then(response => {
             if (response.status === 200) {
-              console.log('Appointments this day', response.data)
               const ampm = response.data.map((tm) => {
                 let H = tm.substr(0, 2)
                 let h = H % 12 || 12
@@ -90,7 +85,6 @@ export default function ResponsiveGrid(props) {
             }
           })
       } catch (err) {
-        console.log('e', err.message)
         setReserved(null);
       }
     }

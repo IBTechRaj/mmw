@@ -34,8 +34,6 @@ const lightTheme = createTheme({ palette: { mode: 'light' } });
 
 export default function Elevation(props) {
 
-  console.log('ele props', props)
-
   const services = ['Car Wash', 'Car Painting', 'Car Polishing', 'Car Repair', 'Music System', 'Scratch Removal', 'Car Checkup', 'Car Interior', 'Denting', 'Tyre Change', 'Car Exterior', 'Car Salon']
   const [areas, setAreas] = useState([])
 
@@ -62,7 +60,6 @@ export default function Elevation(props) {
     axios.get(areasUrl,
     )
       .then(({ data }) => {
-        console.log('areas', data)
         setAreas(data)
       })
   }, [])
@@ -101,7 +98,7 @@ export default function Elevation(props) {
       user_id: props.clientId,
       area_id: 1,
     }
-    console.log('bkg data', booking)
+
     const jwt = localStorage.getItem('token');
     const bkgUrl = 'http://localhost:3001/bookings';
 
@@ -111,7 +108,6 @@ export default function Elevation(props) {
       .then(response => {
         if (response.status === 201) {
           props.setBookingVisible(false)
-          console.log('Booking Done')
           alert('Your booking successful')
         }
       })
@@ -121,7 +117,6 @@ export default function Elevation(props) {
 
         try {
           const res = axios.post(url, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
-          console.log('res', res);
         }
         catch (error) {
           console.log('cl eml err', error);
