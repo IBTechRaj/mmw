@@ -64,6 +64,10 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
       fetch("http://localhost:3001/signup", {
         method: "post",
         headers: {
+          'accept': 'application/json',
+          'Access-Control-Allow-Origin': "*",
+          // 'content-type': 'application/x-www-form-urlencoded',
+          'Access-Control-Allow-Credentials': 'true',
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
