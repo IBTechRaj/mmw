@@ -67,7 +67,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
           // 'accept': 'application/json',
           // 'Access-Control-Allow-Origin': "*",
           // 'content-type': 'application/x-www-form-urlencoded',
-          // 'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Credentials': 'true',
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
