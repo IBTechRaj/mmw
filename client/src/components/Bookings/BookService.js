@@ -55,7 +55,7 @@ export default function Elevation(props) {
     setPincode(e.target.value)
   }
 
-  const areasUrl = 'http://localhost:3001/areas'
+  const areasUrl = 'https://mymotorwash.herokuapp.com/areas'
   useEffect(() => {
     axios.get(areasUrl,
     )
@@ -100,7 +100,7 @@ export default function Elevation(props) {
     }
 
     const jwt = localStorage.getItem('token');
-    const bkgUrl = 'http://localhost:3001/bookings';
+    const bkgUrl = 'https://mymotorwash.herokuapp.com/bookings';
 
     axios.post(bkgUrl, booking, {
       headers: { Authorization: `Bearer ${jwt}` },
@@ -113,7 +113,7 @@ export default function Elevation(props) {
       })
       .then(() => {
         const jwt = localStorage.getItem('token')
-        const url = 'http://localhost:3001/contacts'
+        const url = 'https://mymotorwash.herokuapp.com/contacts'
 
         try {
           const res = axios.post(url, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });

@@ -64,7 +64,7 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3001 }
+  config.action_mailer.default_url_options = { host: 'https://mymotorwash.herokuapp.com' }
 
   
   config.action_mailer.perform_deliveries = true
@@ -79,5 +79,5 @@ config.action_mailer.smtp_settings = {
   enable_starttls_auto: true,
 }
 end
-Rails.application.routes.default_url_options = { host: "http://localhost:3001" }
+Rails.application.routes.default_url_options = { host: "https://mymotorwash.herokuapp.com" }
 

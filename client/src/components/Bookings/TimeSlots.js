@@ -65,7 +65,7 @@ export default function ResponsiveGrid(props) {
 
   useEffect(() => {
     // const jwt = localStorage.getItem('token');
-    const apptUrl = `http://localhost:3001/bookings/${props.startDate.toUTCString()}/${props.pincode}`;
+    const apptUrl = `https://mymotorwash.herokuapp.com/bookings/${props.startDate.toUTCString()}/${props.pincode}`;
 
     const getCurrentAppts = async () => {
       try {
