@@ -13,6 +13,9 @@ import 'react-responsive-modal/styles.css';
 
 
 const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovider, admin, setAdmin, clientId, setClientId, clientEmail, setClientEmail, clientName, setClientName }) => {
+  
+  // const server = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com` : `http://localhost:3001`
+
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -61,8 +64,10 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
           + "Team MyMotorWash"
       }
       console.log('signing up')
+      const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/signup` : `http://localhost:3001/signup`
+
       // fetch("http://localhost:3001/signup", {
-        fetch("https://mymotorwash.herokuapp.com/signup", {
+        fetch(signUpUrl, {
         method: "post",
         headers: {
           // 'accept': 'application/json',
@@ -117,15 +122,17 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
         })
         .then(() => {
           const jwt = localStorage.getItem('token')
-          const url = 'https://mymotorwash.herokuapp.com/contacts'
+          // const contacturl = 'server/contacts'
+          const contactUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/contacts` : `http://localhost:3001/contacts`
+
 
           try {
-            const res = axios.post(url, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
+            const res = axios.post(contactUrl, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
             console.log('res', res);
           }
           catch (error) {
             console.log('oh, no', error);
-          }
+          } 
         })
         .catch((err) => console.error(err));
     }
@@ -137,9 +144,11 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
   const handleSubmitLogin = async (event) => {
     event.preventDefault();
     console.log('logging')
+    const loginUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/login` : `http://localhost:3001/login`
+
     try {
-      fetch("https://mymotorwash.herokuapp.com/login", {
-        method: "post",
+      fetch(loginUrl, {
+        method: "post", 
         headers: {
           "Content-Type": "application/json",
         },

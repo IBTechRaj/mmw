@@ -100,7 +100,9 @@ export default function Elevation(props) {
     }
 
     const jwt = localStorage.getItem('token');
-    const bkgUrl = 'https://mymotorwash.herokuapp.com/bookings';
+    const bkgUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/bookings` : `http://localhost:3001/bookings`
+
+    // const bkgUrl = 'https://mymotorwash.herokuapp.com/bookings';
 
     axios.post(bkgUrl, booking, {
       headers: { Authorization: `Bearer ${jwt}` },
@@ -113,10 +115,12 @@ export default function Elevation(props) {
       })
       .then(() => {
         const jwt = localStorage.getItem('token')
-        const url = 'https://mymotorwash.herokuapp.com/contacts'
+        const contactUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/contacts` : `http://localhost:3001/contacts`
+
+        // const url = 'https://mymotorwash.herokuapp.com/contacts'
 
         try {
-          const res = axios.post(url, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
+          const res = axios.post(contactUrl, emailClientData, { headers: { Authorization: `Bearer ${jwt}` } });
         }
         catch (error) {
           console.log('cl eml err', error);

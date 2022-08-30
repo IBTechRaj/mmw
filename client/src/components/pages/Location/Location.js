@@ -14,6 +14,9 @@ const Location = () => {
               Lahari Susheela Apartments<br />
               Beerappagadda,
               Uppal
+              Hyderabad 500083
+
+              Email: info@mymotorwash.com
             </p>
           </div>
         </div>
