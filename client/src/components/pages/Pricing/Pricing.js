@@ -1,8 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap'
 import './Pricing.css';
+import axios from 'axios';
 
 const Pricing = () => {
+
+  const [serviceData, setServiceData] = useState([]);
+
+  const jwt = localStorage.getItem('token');
+  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/}` : `http://localhost:3001/services/`
+
+  const getServices = () => {
+    axios.get(servicesUrl, {
+      headers: { Authorization: `Bearer ${jwt}` },
+    })
+      .then(response => {
+        console.log('res.dat', response.data)
+        setServiceData(response.data)
+      })
+  }
+  useEffect(() => {
+
+    getServices()
+  }, [])
+
+
   return (
 
 
@@ -20,7 +42,17 @@ const Pricing = () => {
         <div className="row">
           <div className="col-md-4 menuItem">
             <ul className="menu">
-              <li>
+
+
+              {serviceData && serviceData.map(({ id, sname, price, offerprice, description }) => (
+                <li key={id}>
+                  {sname} <span className="price">{price}</span> <span className="offerprice">{offerprice}</span>
+                  <div className="detail">{description}</div>
+                </li>
+              ))}
+
+
+              {/* <li>
                 Car Wash <span className="price">Rs.150</span>
                 <div className="detail">Water wash that cleans the vehicle</div>
               </li>
@@ -77,7 +109,7 @@ const Pricing = () => {
               <li>
                 Car Salon <span className="price">Rs.150</span>
                 <div className="detail">Any other customised service </div>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

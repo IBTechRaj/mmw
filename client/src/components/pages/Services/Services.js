@@ -8,14 +8,17 @@ const Services = () => {
     <>
       <div className="section-header" id="services">
         <h2 className="section-title text-center wow fadeInDown mt-3" style={{ color: 'black' }}>Services</h2>
-        <p className="text-center wow fadeInDown">
+        <h5 className='text-center fw-bold'>Presently Offering</h5>
+        <hr></hr>
+        {/* <p className="text-center wow fadeInDown">
           Water wash <br />
           Interior cleaning<br />
           Fixing minor mechanical issues<br />
-        </p>
+        </p> */}
       </div>
       <Container>
         <Row >
+          <Col xs={6} md={4} className='mb-4'></Col>
           <Col xs={6} md={4} className='mb-4'>
             <Row>
               <Col xs={3} md={2}>
@@ -25,15 +28,20 @@ const Services = () => {
               </Col>
               <Col xs={9} md={8}>
                 <div>
-                  <h4>Car Checkup</h4>
+                  <h4>Car Wash</h4>
                   <p>
-                    On the spot checkup with be undertaken and possible solutions are offered
+                    Your car would be washed at your doorstep and prsented to you in a spic and span condition.
                   </p>
                 </div>
+
               </Col>
             </Row>
           </Col>
-
+        </Row>
+        {/* <hr></hr> */}
+        <h5 className='text-center fw-bold'>Coming Soon</h5>
+        <hr></hr>
+        <Row>
           <Col xs={6} md={4} className='mb-4'>
             <Row>
               <Col xs={3} md={2}>
@@ -43,11 +51,12 @@ const Services = () => {
               </Col>
               <Col xs={9} md={8}>
                 <div>
-                  <h4>Car Wash</h4>
+                  <h4>Car Checkup</h4>
                   <p>
-                    Your car would be washed at your doorstep and prsented to you in a spic and span condition.
+                    On the spot checkup with be undertaken and possible solutions are offered
                   </p>
                 </div>
+
               </Col>
             </Row>
           </Col>

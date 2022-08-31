@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Booking from './components/Bookings/Booking';
+import Admin from './components/Admin/Admin';
 
 
 // const getLoggedStatus = () => {
@@ -32,6 +33,8 @@ function App() {
         clientId={clientId} setClientId={setClientId} />
       {console.log('cl', client)}
       {client ? (<Booking clientId={clientId} clientEmail={clientEmail} clientName={clientName} />) : (null)}
+      {console.log('cl, adm', client, admin)}
+      {admin ? (<Admin />) : (null)}
       <Switch>
         <Route path='/' exact component={Home} />
       </Switch>

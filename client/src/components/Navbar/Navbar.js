@@ -195,6 +195,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
     delete axios.defaults.headers.common.Authorization;
     setLoggedIn(false)
     setClient(false)
+    setAdmin(false)
     localStorage.removeItem('token');
   }
 

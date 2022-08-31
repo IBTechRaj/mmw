@@ -14,4 +14,5 @@ Rails.application.routes.draw do
     
   get 'bookings/:bkg_date/:pincode', to: 'bookings#getAreaDateBkgs'
   resources :bookings
+  resources :services
 end
