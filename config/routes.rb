@@ -8,11 +8,15 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
+ devise_scope :user  do
+          get "/list_users", to: "users/registrations#list_users", as: "list_all_users"
+          get "/list_agents", to: "users/registrations#list_agents", as: "list_all_agents"
+        end
+  # resources :users, only: [:index]
+
     resources :contacts
     resources :areas
    
-    
-  get 'bookings/:bkg_date/:pincode', to: 'bookings#getAreaDateBkgs'
   resources :bookings
   resources :services
 end

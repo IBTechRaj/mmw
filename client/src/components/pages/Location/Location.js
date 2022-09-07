@@ -10,11 +10,12 @@ const Location = () => {
           <div className="section-header">
             <h2 className="section-title text-center wow fadeInDown">Location</h2>
             <p className="text-center wow fadeInDown">
+              Mr Nirmal Kumar <br />
               My Motor Wash<br />
-              Lahari Susheela Apartments<br />
-              Beerappagadda,
-              Uppal
-              Hyderabad 500083
+              201, Susheela Lahari Apartments<br />
+              Uppal Road, Monday Market,
+              Hyderabad 500039
+              Telangana, India
 
               Email: info@mymotorwash.com
             </p>

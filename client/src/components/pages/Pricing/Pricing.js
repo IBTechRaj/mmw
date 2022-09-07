@@ -8,12 +8,14 @@ const Pricing = () => {
   const [serviceData, setServiceData] = useState([]);
 
   const jwt = localStorage.getItem('token');
-  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/}` : `http://localhost:3001/services/`
+  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/` : `http://localhost:3001/services/`
 
   const getServices = () => {
-    axios.get(servicesUrl, {
-      headers: { Authorization: `Bearer ${jwt}` },
-    })
+    axios.get(servicesUrl,
+      // {
+      // headers: { Authorization: `Bearer ${jwt}` },
+      // }
+    )
       .then(response => {
         console.log('res.dat', response.data)
         setServiceData(response.data)

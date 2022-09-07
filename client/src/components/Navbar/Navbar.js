@@ -115,6 +115,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
             setSprovider(true)
           } else if (data.data.usertype === 'admin') {
             setAdmin(true)
+            setClientName(data.data.first_name)
           }
         })
         .then((json) => {
@@ -182,6 +183,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
             setSprovider(true)
           } else if (data.data.usertype === 'admin') {
             setAdmin(true)
+            setClientName(data.data.first_name)
           }
         })
         .then((json) => console.dir(json))

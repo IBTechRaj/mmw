@@ -25,7 +25,7 @@ export default function ServiceDetails(props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/}` : `http://localhost:3001/services/`
+  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/` : `http://localhost:3001/services/`
   const serviceDelUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/` : `http://localhost:3001/services/`
   const serviceAddUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/` : `http://localhost:3001/services/`
 

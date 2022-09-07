@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Booking from './components/Bookings/Booking';
 import Admin from './components/Admin/Admin';
+// import Contact from './components/pages/Contact/Contact'
 
 
 // const getLoggedStatus = () => {
@@ -33,10 +34,11 @@ function App() {
         clientId={clientId} setClientId={setClientId} />
       {console.log('cl', client)}
       {client ? (<Booking clientId={clientId} clientEmail={clientEmail} clientName={clientName} />) : (null)}
-      {console.log('cl, adm', client, admin)}
-      {admin ? (<Admin />) : (null)}
+      {console.log('cl, adm,name', client, admin, clientName)}
+      {admin ? (<Admin clientName={clientName} />) : (null)}
       <Switch>
         <Route path='/' exact component={Home} />
+        {/* <Route path='/Contact' exact component={Contact} /> */}
       </Switch>
       <Footer />
     </Router>

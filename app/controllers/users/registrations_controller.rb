@@ -4,6 +4,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_user!
   respond_to :json
 
+  
+  
+  def list_users
+    @users = User.where(usertype: 'client')
+    render json: {
+      status: 200,
+      data: @users
+    }
+  end
+
+  def list_agents
+    @users = User.where(usertype: 'sprovider')
+    render json: {
+      status: 200,
+      data: @users
+    }
+  end
+  
   private
 
   def respond_with(resource, _opts = {})
