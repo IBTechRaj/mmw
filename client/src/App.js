@@ -30,7 +30,7 @@ function App() {
         clientEmail={clientEmail} setClientEmail={setClientEmail}
         clientName={clientName} setClientName={setClientName}
         setSprovider={setSprovider}
-        setAdmin={setAdmin}
+        setAdmin={setAdmin} 
         clientId={clientId} setClientId={setClientId} />
       {console.log('cl', client)}
       {client ? (<Booking clientId={clientId} clientEmail={clientEmail} clientName={clientName} />) : (null)}

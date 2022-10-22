@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   post 'forgot_password', to: 'password_resets#forgot'
-  post 'password_resets/reset', to: 'password_reset#reset'
+  post 'reset_password', to: 'password_resets#reset'
   devise_for :users, path: '', path_names: {
     sign_in: 'login',
     sign_out: 'logout',

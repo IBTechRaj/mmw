@@ -13,10 +13,10 @@ class PasswordResetsController < ApplicationController
     user = User.find_by(email: params[:email]) # if present find user by email
 puts user
     if user#.present?
-      # token=user.generate_password_token! #generate pass token
-      token=SecureRandom.hex(10)
-      user.update!(reset_digest: token)
-      if user.reset_digest != nil
+      token=user.generate_password_token! #generate pass token
+      # token=SecureRandom.hex(10)
+      # user.update!(reset_digest: token)
+      if user.reset_password_token != nil
         PasswordMailer.password_reset(user).deliver_now
       # SEND EMAIL HERE
       # render json: {status: 'ok'}, status: :ok
@@ -30,13 +30,13 @@ puts user
   def reset
     token = params[:token].to_s
 
-    if params[:email].blank?
-      return render json: {error: 'Token not present'}
-    end
+    # if params[:email].blank?
+    #   return render json: {error: 'Token not present'}
+    # end
 
     user = User.find_by(reset_password_token: token)
 
-    if user.present? && user.password_token_valid?
+    if user && user.password_token_valid?
       if user.reset_password!(params[:password])
         render json: {status: 'ok'}, status: :ok
       else

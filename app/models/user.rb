@@ -43,11 +43,11 @@ def reset_password!(password)
  self.password = password
  save!
 end
+  
+private
 
-# private
-
-# def generate_token
-#  SecureRandom.hex(10)
-# end
+def generate_token
+ SecureRandom.hex(10)
+end
 
 end
