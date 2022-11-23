@@ -127,6 +127,6 @@ config.action_mailer.smtp_settings = {
 }
 end
 Rails.application.routes.default_url_options = { host: "https://mymotorwash.herokuapp.com" }
-config.assets.compile = true 
+
 
 # end
