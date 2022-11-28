@@ -111,7 +111,7 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-   config.action_mailer.default_url_options = { host: 'https://mymotorwash.herokuapp.com' }
+   config.action_mailer.default_url_options = { host: 'https://cloud.digitalocean.com/apps/d2113ff0-a51c-4002-b52a-4c0d0eb73c74/logs?i=1c86de' }
 
   
   config.action_mailer.perform_deliveries = true
@@ -126,7 +126,8 @@ config.action_mailer.smtp_settings = {
   enable_starttls_auto: true,
 }
 end
-Rails.application.routes.default_url_options = { host: "https://mymotorwash.herokuapp.com" }
+# Rails.application.routes.default_url_options = { host: "https://mymotorwash.herokuapp.com" }
+Rails.application.routes.default_url_options = { host: "https://cloud.digitalocean.com/apps/d2113ff0-a51c-4002-b52a-4c0d0eb73c74/logs?i=1c86de" }
 
 
 # end
