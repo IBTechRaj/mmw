@@ -79,5 +79,6 @@ config.action_mailer.smtp_settings = {
   enable_starttls_auto: true,
 }
 end
+# Rails.application.routes.default_url_options = { host: "https://mymotorwash.herokuapp.com" }
 Rails.application.routes.default_url_options = { host: "https://mymotorwash.herokuapp.com" }
 
