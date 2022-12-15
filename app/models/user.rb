@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
 
          has_many :bookings, dependent: :destroy
-         has_one :area
+         has_one :area, dependent: :destroy
 
          VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
 
