@@ -82,6 +82,7 @@ test:
 #
 production:
   <<: *default
+  rl: <%= ENV['DATABASE_URL'] %>
   database: mmw_production
   username: mmw
   password: <%= ENV['MMW_DATABASE_PASSWORD'] %>

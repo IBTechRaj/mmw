@@ -29,3 +29,5 @@ rails g migration add_first_name_last_name_gender_dob_mobile_pincode_usertype_to
 # 
     // "start": " node --max_old_space_size=2560 node_modules/.bin/react-scripts start",
     // "build": " node --max_old_space_size=2560 node_modules/.bin/react-scripts build",
+
+    Rails Deploy Procedure : https://render.com/docs/deploy-rails
