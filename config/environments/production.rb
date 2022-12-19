@@ -133,5 +133,5 @@ end
 # Rails.application.routes.default_url_options = { host: "http://snake.mmw-66-aws3.c66.me" }
 Rails.application.routes.default_url_options = { host: "mmw-production.up.railway.app" }
 
-config.hosts << "mmw-production.up.railway.app"
+# config.hosts << "mmw-production.up.railway.app"
 # end
