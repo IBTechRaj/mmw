@@ -28,7 +28,7 @@ class User < ApplicationRecord
              validates :mobile, presence: true, length: { is: 10 }
              validates :pincode, presence: true, length: { is: 6 }
 
-  def generate_password_token!
+def generate_password_token!
  self.reset_password_token = generate_token
  self.reset_password_sent_at = Time.now.utc
  save!
